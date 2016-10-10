@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="00972225-816c-448c-a47d-9734b07da53a">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="name" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.name,a.DOB,a.phone,a.email,b.name as type,a.br_no from mst_customer a join mst_type b on a.type_no = b.type_no where a.name like $P{name} and a.flag!='D' and b.flag!='D']]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="DOB" class="java.sql.Date"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="br_no" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3b934355-57b5-435b-a243-034e26de383e" x="221" y="4" width="136" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUSTOMER DETAILS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="26" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="b08bd730-971f-47dd-a287-a2c13b0984d3" x="3" y="4" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0a2c9b0e-f73d-4ba5-8c60-54303eff7791" x="456" y="2" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[BR No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a2c9b0e-f73d-4ba5-8c60-54303eff7791" x="101" y="1" width="44" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOB]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="4078ab4e-f89e-4443-9b32-c911d6fb3a78" x="1" y="20" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="4078ab4e-f89e-4443-9b32-c911d6fb3a78" x="1" y="3" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="0a2c9b0e-f73d-4ba5-8c60-54303eff7791" x="355" y="2" width="86" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a2c9b0e-f73d-4ba5-8c60-54303eff7791" x="212" y="1" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a2c9b0e-f73d-4ba5-8c60-54303eff7791" x="1" y="2" width="100" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0a2c9b0e-f73d-4ba5-8c60-54303eff7791" x="145" y="1" width="75" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Phone]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement uuid="6656c90e-8825-483b-ab76-e47ceb7014c8" x="100" y="3" width="33" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DOB}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c6073166-7301-4d56-8a30-0e4e26bed3b3" x="0" y="3" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8ac011b4-b79b-4ca7-ada3-6a20c1aad172" x="354" y="3" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3efb6b3c-8ac5-4894-85bd-b831afde529d" x="144" y="3" width="67" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5e968b5b-4e64-42d8-a824-835206386d3c" x="211" y="3" width="143" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9cd9b25e-9100-4f4a-bf4f-3059c476b9b4" x="455" y="3" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{br_no}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0d7956cb-d77a-4151-b285-6ec7a5caef6a" x="234" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>

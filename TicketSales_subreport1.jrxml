@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TicketSales_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0"  >
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="To" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="From" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select sum(a.fee),'Credit' as transaction_type from trn_history a join mst_customer b on a.customer_no = b.customer_no join mst_type c on b.type_no = c.type_no where c.type = 'PRIVILEGE' and a.date between $P{From} and $P{To} and a.flag != 'D' and b.flag != 'D'
+union all
+select sum(a.fee),'Cash' as transaction_type from trn_history a join mst_customer b on a.customer_no = b.customer_no join mst_type c on b.type_no = c.type_no where c.type != 'PRIVILEGE' and a.date between $P{From} and $P{To} and a.flag != 'D' and b.flag != 'D']]>
+	</queryString>
+	<field name="sum(a.fee)" class="java.math.BigDecimal"/>
+	<field name="transaction_type" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement   x="45" y="2" width="124" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sum(a.fee)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="4" y="2" width="31" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transaction_type}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement   x="37" y="3" width="4" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

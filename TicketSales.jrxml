@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"  >
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="To" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="From" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Joel\\Documents\\NetBeansProjects\\TENew\\src\\tenew\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select b.name,b.phone,b.email,a.date,a.no_of_laps,a.fee,'Credit' as transaction_type from trn_history a join mst_customer b on a.customer_no = b.customer_no join mst_type c on b.type_no = c.type_no where c.type = 'PRIVILEGE' and a.date between $P{From} and $P{To} and a.flag != 'D' and b.flag != 'D'
+union all
+select b.name,b.phone,b.email,a.date,a.no_of_laps,a.fee,'Cash' as transaction_type from trn_history a join mst_customer b on a.customer_no = b.customer_no join mst_type c on b.type_no = c.type_no where c.type != 'PRIVILEGE' and a.date between $P{From} and $P{To} and a.flag != 'D' and b.flag != 'D']]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="date" class="java.sql.Date"/>
+	<field name="no_of_laps" class="java.lang.Integer"/>
+	<field name="fee" class="java.math.BigDecimal"/>
+	<field name="transaction_type" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement   x="365" y="5" width="8" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement   x="87" y="5" width="211" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RENT RECEIVED FOR THE PERIOD ]]></text>
+			</staticText>
+			<textField>
+				<reportElement   x="298" y="5" width="76" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{From}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="374" y="5" width="78" height="20"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{To}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement   x="450" y="5" width="46" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AMOUNT]]></text>
+			</staticText>
+			<line>
+				<reportElement   x="0" y="19" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement   x="125" y="5" width="40" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PHONE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement   x="34" y="5" width="39" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement   x="341" y="5" width="40" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement   x="394" y="5" width="51" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO OF LAPS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement   x="202" y="5" width="40" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EMAIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement   x="501" y="4" width="46" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TYPE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement   x="0" y="5" width="32" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sl. No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement   x="340" y="3" width="51" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="125" y="3" width="77" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="448" y="3" width="48" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fee}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="34" y="3" width="91" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="202" y="3" width="138" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="396" y="3" width="49" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_of_laps}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="501" y="3" width="54" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{transaction_type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement   x="0" y="3" width="32" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement   x="224" y="7" width="59" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement   x="284" y="7" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement   x="0" y="7" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement   x="0" y="3" width="555" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="3" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="40" splitType="Stretch">
+			<subreport>
+				<reportElement   x="423" y="5" width="122" height="32"/>
+				<subreportParameter name="To">
+					<subreportParameterExpression><![CDATA[$P{To}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="From">
+					<subreportParameterExpression><![CDATA[$P{From}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "TicketSales_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement   x="377" y="12" width="46" height="20"/>
+				<textElement/>
+				<text><![CDATA[TOTAL =]]></text>
+			</staticText>
+			<line>
+				<reportElement   x="0" y="3" width="555" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

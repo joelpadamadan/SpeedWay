@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CashSales_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="853b356a-b6c5-43ad-aeb7-b806a519a531">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="To" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="From" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select sum(totalfee) totalfee from (select sum(a.fee) totalfee from trn_history a join mst_customer b on a.customer_no = b.customer_no join mst_type c on b.type_no = c.type_no where c.type != 'PRIVILEGE' and date between $P{From} and $P{To} and a.flag != 'D' and b.flag != 'D' union all select sum(a.amount) totalfee from trn_account a join mst_customer b on a.customer_no = b.customer_no join mst_type c on b.type_no = c.type_no where c.type = 'PRIVILEGE' and a.date between $P{From} and $P{To} and a.flag != 'D' and b.flag != 'D')s]]>
+	</queryString>
+	<field name="totalfee" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0e3cb2ba-8649-493f-83f8-4997e3b6e15e" x="10" y="10" width="82" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL SALES : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="0f8a793f-9614-49ac-818c-216be7ade93c" x="91" y="10" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{totalfee}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
